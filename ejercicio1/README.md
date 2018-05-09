@@ -1,4 +1,4 @@
-#Ejercicio 1
+# Ejercicio 1
 
 Recognizing parts of react and communications between components
 
