@@ -6,13 +6,15 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 class Lienzo extends Component {
     render() {
+        console.log(this.props.location);
+        console.log(this.props.match);
+        console.log(this.props.history);
         return (
             <div className="container">
                 <div className="jumbotron">
                     <h2> Tienda Name </h2>
                 </div>
 
-                <BrowserRouter>
                     <div>
                         <div>
                             <Link to="/bebidas">Bebidas</Link>
@@ -23,7 +25,7 @@ class Lienzo extends Component {
                             <Route path="/platillos" component={Platillos} />
                         </div>
                     </div>
-                </BrowserRouter>
+               
                 <Pedidos />
 
             </div>

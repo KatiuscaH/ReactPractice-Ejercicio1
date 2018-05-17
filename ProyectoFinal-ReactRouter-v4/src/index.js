@@ -2,19 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import Lienzo from './Lienzo';
-/*import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import Platillos from './Platillos';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-//Rutas!
-/*const direcciones = (
-<Router history={ browserHistory }>
-  <Route path="/" component={Lienzo}>
-  <IndexRoute component={Platillos}></IndexRoute>
-  </Route>
-</Router>
+const RouterDeLienzo = (
+  <BrowserRouter>
+    <Route path="/" component={Lienzo}/>
+  </BrowserRouter>
 );
-*/
+
 ReactDOM.render(
-  <Lienzo/>,
+  RouterDeLienzo,
   document.getElementById('root')
 );
