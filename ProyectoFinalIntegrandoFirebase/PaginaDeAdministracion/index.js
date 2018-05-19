@@ -9,10 +9,31 @@ var config = {
 firebase.initializeApp(config);
 
 /**
+ * 0. Autenticar
  * 1. Crear Platillos
  * 2. Leer nuestros platillos
  * 3. Eliminar nuestros platillos
  */
+
+//Autenticar con firebase
+var ingresar = function () {
+    var email = document.getElementById("correo").value;
+    var password = document.getElementById("pass").value;
+
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(function () {
+            console.log("Ingreso correcto");
+            window.location = "agregarPlatillo.html";
+        })
+        .catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log("Error :" + errorCode + " "+ errorMessage);
+            // ...
+        });
+
+}
 
 //1. Crear platillos
 var database = firebase.database();//referencia a db de firebase
@@ -99,7 +120,7 @@ function funcionDeLaForma() {
         escribirPlatillos(nombre, descripcion, precio, imagen);
         alert("Platillo añadido");
     } catch (error) {
-        console.log("No se agregó el platillo: "+ error);
+        console.log("No se agregó el platillo: " + error);
     }
 }
 
