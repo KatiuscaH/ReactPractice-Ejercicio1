@@ -29,11 +29,27 @@ var ingresar = function () {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            console.log("Error :" + errorCode + " "+ errorMessage);
+            console.log("Error :" + errorCode + " " + errorMessage);
             // ...
         });
 
 }
+
+//Observador del estado de autenticacion
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      console.log("Si está autorizado");
+  
+    } else {
+      // No user is signed in.
+      console.log("No está autorizado");
+      if(window.location.pathname !== "/index.html"){
+          window.location = "index.html";
+      }
+    }
+  });
+
 
 //1. Crear platillos
 var database = firebase.database();//referencia a db de firebase
