@@ -150,13 +150,8 @@ function funcionDeLaForma(event) {
     var imagen = document.getElementById("imgDir").value;
 
 
-    //alert(nombre + descripcion + precio);
-    /*try {
         escribirPlatillos(nombre, descripcion, precio, imagen);
-       // alert("Platillo añadido");
-    } catch (error) {
-        console.log("No se agregó el platillo: " + error);
-    }*/
+    
 
     return false;
 }
