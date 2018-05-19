@@ -19,47 +19,18 @@
 <body>
     <div class="container">
         <div class="jumbotron">
-            <h2>Página de Administración</h2>
+            <h2>Bienvenido</h2>
         </div>
-        <ul class="nav nav-pills">
-            <li class="nav-item">
-                <a class="nav-link active" href="platillos.html">Platillos</a>
-            </li>
-
-        </ul>
-
-        <!--Subir imagen de cada platillo-->
+       
         <div>
-            <input type="file" name="imagen" onchange="visualizarArchivo()">
-            <br/>
-            <br/>
-            <img src="" height="300px" alt="Imagen de Platillo" id="imgPlatillo">
+            <label>Correo:</label>
+            <input class="form-control" type="email" id="correo"><br/><br/>
+            <label>Contraseña:</label>
+            <input class="form-control" type="password" id="pass"><br/><br/>
+            <button class="btn btn-success" onclick="ingresar()">Ingresar</button>
         </div>
-        <div>
-            <form onsubmit="funcionDeLaForma()">
-                <label>Nombre</label>
-                <input class="form-control" type="text" name="nombre" id="nombre" required>
-                <br/>
-                <br/>
 
-                <label>Descripción</label>
-                <textarea class="form-control" id="descripcion" required></textarea>
-                <br/>
-                <br/>
-
-                <label>Precio</label>
-                <input class="form-control" type="text" name="precio" id="precio" required>
-                <br/>
-                <br/>
-
-                <label>URL imagen</label>
-                <input class="form-control" type="text" name="direccion" id="imgDir" required>
-                <br/>
-                <br/>
-
-                <input class="btn btn-success" type="submit" value="Subir">
-            </form>
-        </div>
+        
     </div>
 </body>
 
