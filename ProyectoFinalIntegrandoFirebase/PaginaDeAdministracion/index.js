@@ -36,19 +36,32 @@ var ingresar = function () {
 }
 
 //Observador del estado de autenticacion
-firebase.auth().onAuthStateChanged(function(user) {
+firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      // User is signed in.
-      console.log("Si está autorizado");
-  
+        // User is signed in.
+        console.log("Si está autorizado");
+
     } else {
-      // No user is signed in.
-      console.log("No está autorizado");
-      if(window.location.pathname !== "/index.html"){
-          window.location = "index.html";
-      }
+        // No user is signed in.
+        console.log("No está autorizado");
+        if (window.location.pathname !== "/index.html") {
+            window.location = "index.html";
+        }
     }
-  });
+});
+
+var salir = function () {
+
+    firebase.auth().signOut().then(function () {
+        // Sign-out successful.
+        console.log("Sesión terminada");
+    }, function (error) {
+        // An error happened.
+        console.log("Error en terminar la sesión: " + error);
+    });
+
+}
+
 
 
 //1. Crear platillos
@@ -60,6 +73,11 @@ var escribirPlatillos = function (pNombre, pDescripcion, pPrecio, pDireccion) {
         precio: pPrecio,
         cantidad: 0,
         direccion: pDireccion
+    }).then(function () {
+        alert("Platillo añadido");
+        window.location = "agregarPlatillo.html";
+    }).catch(function (error) {
+        alert("Platillo NO añadido " + error);
     })
 }
 
@@ -124,7 +142,8 @@ var eliminarPlatillos = function (id) {
 }
 
 
-function funcionDeLaForma() {
+function funcionDeLaForma(event) {
+    event.preventDefault();
     var nombre = document.getElementById("nombre").value;
     var descripcion = document.getElementById("descripcion").value;
     var precio = document.getElementById("precio").value;
@@ -132,12 +151,14 @@ function funcionDeLaForma() {
 
 
     //alert(nombre + descripcion + precio);
-    try {
+    /*try {
         escribirPlatillos(nombre, descripcion, precio, imagen);
-        alert("Platillo añadido");
+       // alert("Platillo añadido");
     } catch (error) {
         console.log("No se agregó el platillo: " + error);
-    }
+    }*/
+
+    return false;
 }
 
 
