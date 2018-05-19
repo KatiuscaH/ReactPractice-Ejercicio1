@@ -31,9 +31,9 @@ var escribirPlatillos = function (pNombre, pDescripcion, pPrecio, pDireccion) {
 var imprimirPlatillos = function () {
     var query = database.ref('alimentos/');
     query.on('value', function (snapshot) {
-       
-       var ul = document.getElementById("lista");
-        snapshot.forEach(function(childSnapshot){
+
+        var ul = document.getElementById("lista");
+        snapshot.forEach(function (childSnapshot) {
             console.log(childSnapshot.key);
             console.log(childSnapshot.val());
 
@@ -44,26 +44,46 @@ var imprimirPlatillos = function () {
             var div = document.createElement("div");
             var img = document.createElement("img");
             var br = document.createElement("br");
+            var button = document.createElement("button");
 
-            img.src= childData.direccion;
+            button.setAttribute("id", childKey);
+            button.setAttribute("class", "btn btn-danger");
+            button.setAttribute("onclick", "eliminarPlatillos(this.id)");
+            button.appendChild(document.createTextNode("Eliminar platillo"));
+
+            img.src = childData.direccion;
             img.height = 200;
             img.width = 200;
             img.alt = "Imagen del platillo";
 
             div.appendChild(img);
             div.style.float = "right";
-            li.setAttribute("class","list-group-item");
+            li.setAttribute("class", "list-group-item");
             li.appendChild(div);
             li.appendChild(document.createTextNode("Nombre: " + childData.nombre));
-            li.appendChild(br);
+            li.appendChild(document.createElement("br"));
             li.appendChild(document.createTextNode("Descripcion: " + childData.descripcion));
-            li.appendChild(br);
+            li.appendChild(document.createElement("br"));
             li.appendChild(document.createTextNode("Precio: " + childData.precio));
-
+            li.appendChild(document.createElement("br"));
+            li.appendChild(button);
 
             ul.appendChild(li);
         })
     })
+}
+
+//3. Eliminar platillos
+var eliminarPlatillos = function (id) {
+    database.ref('alimentos/' + id).remove()
+        .then(function () {
+            alert("Platillo eliminado");
+            console.log("Platillo eliminado");
+
+        })
+        .catch(function (error) {
+            console.log("No se boirró el platillo " + error);
+        });
 }
 
 
@@ -75,7 +95,12 @@ function funcionDeLaForma() {
 
 
     //alert(nombre + descripcion + precio);
-    escribirPlatillos(nombre, descripcion, precio, imagen);
+    try {
+        escribirPlatillos(nombre, descripcion, precio, imagen);
+        alert("Platillo añadido");
+    } catch (error) {
+        console.log("No se agregó el platillo: "+ error);
+    }
 }
 
 
