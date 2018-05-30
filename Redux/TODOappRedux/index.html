@@ -38,7 +38,8 @@
             if (action.type === "AGR") {
                 newState.lista.push({
                     id: action.id,
-                    li: "<li>" + action.tarea + "</li>"
+                    li: "<li>" + action.tarea +
+                        "<button id='" + action.id + "' onclick='eliminar(id)'>Eliminar</button>" + "</li>"
                 });
 
                 return newState;
@@ -62,6 +63,14 @@
             }
         }
 
+        var actionEliminar = function(id){
+            return{
+                type: 'ELM',
+                id
+            }
+
+        }
+
         var id = 1;
 
         var agregarTarea = function (evento) {
@@ -75,6 +84,11 @@
             }
 
         }
+
+        var eliminar = function (_id) {
+            store.dispatch(actionEliminar(_id));
+            console.log(_id);
+         }
 
         var mostrarTareas = function () {
             var lista = document.getElementById("listaTareas");
