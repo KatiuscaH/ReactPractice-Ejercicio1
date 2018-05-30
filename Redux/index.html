@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Redux</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.0/redux.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <label>Valor:
+            <span id="numero"></span>
+        </label>
+        <br/>
+        <button id="aum" onclick="aumentar()">Aumentar!</button>
+        <button id="dis" onclick="disminuir()">Disminuir!</button>
+    </div>
+
+    <script type="text/javascript">
+        //Redux game.
+        var self = this;
+        /*
+        Redux actua sobre estados
+        */
+        //1. State
+        var state = {
+            cantidad: 0
+        }
+
+        //2. Store toma dos parametros (reducer, state)
+        var store = Redux.createStore(reducer, state);
+
+        //3. Reducer es una funcion que regresa un nuevo estado y
+        //toma a state y action como parametros
+
+        function reducer(state, action) {
+            var nuevoEstado = Object.assign({}, state);
+            if (action.type === 'AUM') {
+                // console.log(state.cantidad);
+                nuevoEstado.cantidad = state.cantidad + 1;
+                /*console.log(nuevoEstado.cantidad);
+                console.log(self.state.cantidad);*/
+                return nuevoEstado;
+            } else {
+                if (action.type === 'DIS') {
+                    // console.log(state.cantidad);
+                    nuevoEstado.cantidad = state.cantidad - 1;
+                    /*console.log(nuevoEstado.cantidad);
+                    console.log(self.state.cantidad);*/
+                    return nuevoEstado;
+                }
+            }
+
+
+            return state
+        }
+
+        //4. Action es un objeto js con el requisito de tener
+        //un key "type"
+        //Se acciona a traves de un store.dispatch(action);
+
+        var actionAumentar = {
+            type: 'AUM'
+        }
+
+        var actionDisminuir = {
+            type: 'DIS'
+        }
+
+        //5. Dispatch ejecuta la llamada al store y pasa el tipo de accion
+
+
+        var aumentar = function () {
+            store.dispatch(actionAumentar);
+        }
+
+        var disminuir = function () {
+            store.dispatch(actionDisminuir);
+        }
+
+        var numero = document.getElementById("numero");
+        // 6. Acceder al state a traves de la STORE
+        var mostrarNumero = function () {
+            numero.innerHTML = store.getState().cantidad;
+        }
+
+        mostrarNumero();
+
+        //7. Suscribir el metodo que tiene o muestra el state
+        //para que se ejecute nuevamente cuando el store lo indique
+
+        store.subscribe(mostrarNumero);
+
+    </script>
+
+</body>
+
+</html>
