@@ -2,7 +2,7 @@
 
 Creación de una plantilla html importando el CDN de redux para mirar su comportarmiento
 
-#Elementos de REDUX
+# Elementos de REDUX
 
 - State
 - Store
