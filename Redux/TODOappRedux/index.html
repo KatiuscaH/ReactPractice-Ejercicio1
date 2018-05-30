@@ -43,6 +43,13 @@
                 });
 
                 return newState;
+            } else {
+                if (action.type === "ELM") {
+                    newState.lista = state.lista.filter(function (elemento) {
+                        return parseInt(elemento.id) !== parseInt(action.id);
+                    });
+                    return newState;
+                }
             }
 
             return state;
@@ -63,8 +70,8 @@
             }
         }
 
-        var actionEliminar = function(id){
-            return{
+        var actionEliminar = function (id) {
+            return {
                 type: 'ELM',
                 id
             }
@@ -88,7 +95,7 @@
         var eliminar = function (_id) {
             store.dispatch(actionEliminar(_id));
             console.log(_id);
-         }
+        }
 
         var mostrarTareas = function () {
             var lista = document.getElementById("listaTareas");
