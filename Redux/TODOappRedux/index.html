@@ -36,13 +36,26 @@
         function reducer(state, action) {
             var newState = Object.assign({}, state);
             if (action.type === "AGR") {
-                newState.lista.push({
+                /* newState.lista.push({
                     id: action.id,
                     li: "<li>" + action.tarea +
                         "<button id='" + action.id + "' onclick='eliminar(id)'>Eliminar</button>" + "</li>"
                 });
+ *//* 
+                                              return newState; */
+                newState.lista = state.lista.concat(
+                    [
+                        {
+                            id: action.id,
+                            li: "<li>" + action.tarea +
+                                "<button id='" + action.id + "' onclick='eliminar(id)'>Eliminar</button>" + "</li>"
+
+                        }
+                    ]
+                );
 
                 return newState;
+
             } else {
                 if (action.type === "ELM") {
                     newState.lista = state.lista.filter(function (elemento) {
