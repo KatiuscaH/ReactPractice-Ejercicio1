@@ -11,10 +11,14 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Welcome to React-Redux Counter</h1>
         </header>
         <p className="App-intro">
         {this.props.informacion}
+        <br/>
+        <button onClick={this.props.aumentar}>Aumentar!</button>
+        <br/>
+        <button onClick={this.props.disminuir}>Disminuir!</button>
         <br/>
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
@@ -36,9 +40,24 @@ const mapStateToProps = (state)=>{
 }
 //puede ser una funcion o un objeto.
 //es mejor usar la funcion
-const mapDispatchToProps = {
+//Es un objeto que asume que las funciones declaradas dentro de el
+//son action creator
+//y que al ingresarlas al component las engloba en dispatch
+//para que de esta forma puedan ser llamadas como dispatch
+//Forma de objeto
+/*const mapDispatchToProps = {
   aumentar: ()=>{return {type: 'AUM'}},
   disminuir: ()=>{return {type: 'DIS'}}
 }
+*/
+
+//forma de funcion
+const mapDispatchToProps = (dispatch)=>{
+  return{
+    aumentar: ()=>{dispatch({type: 'AUM'});},
+    disminuir: ()=>{dispatch({type: 'DIS'});}
+  }
+}
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
